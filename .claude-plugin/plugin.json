@@ -1,0 +1,9 @@
+{
+  "name": "investlikeagirl",
+  "version": "1.0.0",
+  "description": "Read-only access to the Invest Like a Girl member community and learning library.",
+  "author": {
+    "name": "Invest Like a Girl",
+    "email": "contato@investlikeagirl.com.br"
+  }
+}

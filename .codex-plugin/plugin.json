@@ -1,0 +1,33 @@
+{
+  "name": "investlikeagirl",
+  "version": "1.0.0",
+  "description": "Read-only access to the Invest Like a Girl member community and learning library.",
+  "author": {
+    "name": "Invest Like a Girl",
+    "email": "contato@investlikeagirl.com.br",
+    "url": "https://www.investlikeagirl.com.br"
+  },
+  "homepage": "https://www.investlikeagirl.com.br/comunidade",
+  "repository": "https://github.com/plaurino-pla/investlikeagirl-agent",
+  "license": "MIT",
+  "keywords": ["investimentos", "educacao-financeira", "comunidade", "mcp", "read-only"],
+  "skills": "./skills/",
+  "interface": {
+    "displayName": "Invest Like a Girl",
+    "shortDescription": "Search your ILG community in read-only mode.",
+    "longDescription": "Ask your agent to search ILG community conversations, read Q&A threads, check your own questions, and find official Radar, course, and resource material. An active trial or membership is required for community content.",
+    "developerName": "Invest Like a Girl",
+    "category": "Education",
+    "capabilities": ["Read-only", "Search", "Member authentication"],
+    "websiteURL": "https://www.investlikeagirl.com.br",
+    "privacyPolicyURL": "https://www.investlikeagirl.com.br/legal/privacy",
+    "termsOfServiceURL": "https://www.investlikeagirl.com.br/legal/terms",
+    "brandColor": "#A52C5B",
+    "defaultPrompt": [
+      "O que a comunidade ILG diz sobre reserva de emergência?",
+      "Minhas perguntas no Q&A já foram respondidas?",
+      "Encontre material da ILG sobre ETFs."
+    ]
+  },
+  "mcpServers": "./.mcp.json"
+}

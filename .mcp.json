@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "investlikeagirl": {
+      "type": "http",
+      "url": "https://www.investlikeagirl.com.br/mcp"
+    }
+  }
+}
