@@ -1,0 +1,152 @@
+{
+  "$schema": "https://developers.openai.com/apps-sdk/schemas/chatgpt-app-submission.v1.json",
+  "schema_version": 1,
+  "app_info": {
+    "display_name": "Invest Like a Girl",
+    "subtitle": "Pesquise sua comunidade ILG",
+    "description": "A Invest Like a Girl permite que membros autenticados pesquisem conversas da comunidade, leiam threads e respostas do Q&A, acompanhem suas próprias perguntas e encontrem materiais educacionais oficiais do Radar, trilhas e recursos em modo somente leitura.",
+    "category": "EDUCATION"
+  },
+  "tools": {
+    "get_my_ilg_context": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Apenas recupera o perfil, o status de acesso e a sequência de estudos da pessoa autenticada.",
+        "open_world_justification": "Não publica conteúdo nem altera sistemas externos ou estado visível na internet.",
+        "destructive_justification": "Não exclui, sobrescreve, revoga acesso ou executa ações irreversíveis."
+      }
+    },
+    "list_ilg_channels": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Apenas lista espaços, canais e contagens de conversas já existentes.",
+        "open_world_justification": "Não cria canais nem altera conteúdo público ou sistemas de terceiros.",
+        "destructive_justification": "Não remove canais, conversas ou qualquer outro dado."
+      }
+    },
+    "search_ilg_community": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Apenas pesquisa posts e respostas existentes e retorna trechos sem anexos ou contatos.",
+        "open_world_justification": "Não publica respostas nem modifica a comunidade ou serviços externos.",
+        "destructive_justification": "Não exclui, edita ou sobrescreve posts, respostas ou perfis."
+      }
+    },
+    "get_ilg_thread": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Apenas lê um post existente e suas respostas em ordem, sem retornar anexos.",
+        "open_world_justification": "Não comenta, reage, compartilha ou altera nenhum sistema externo.",
+        "destructive_justification": "Não apaga, fecha, modera ou modifica a conversa."
+      }
+    },
+    "list_my_ilg_questions": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Apenas recupera as perguntas da pessoa autenticada e informa se a equipe respondeu.",
+        "open_world_justification": "Não envia perguntas, respostas ou notificações para a comunidade.",
+        "destructive_justification": "Não edita nem remove perguntas ou respostas existentes."
+      }
+    },
+    "search_ilg_library": {
+      "annotations": {
+        "readOnlyHint": true,
+        "openWorldHint": false,
+        "destructiveHint": false
+      },
+      "justifications": {
+        "read_only_justification": "Apenas pesquisa metadados publicados do Radar, crônicas, trilhas e recursos.",
+        "open_world_justification": "Não publica material nem altera a biblioteca ou sistemas de terceiros.",
+        "destructive_justification": "Não exclui, sobrescreve ou despublica conteúdo educacional."
+      }
+    }
+  },
+  "test_cases": [
+    {
+      "description": "Consultar o contexto e o acesso da pessoa conectada.",
+      "user_prompt": "Qual é meu perfil na ILG e minha assinatura está ativa?",
+      "file_attachment_urls": null,
+      "tools_triggered": "get_my_ilg_context",
+      "expected_output": "Resume o perfil, o status de acesso e a sequência de estudos sem revelar o e-mail da pessoa.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Orientar a pessoa entre os canais da comunidade.",
+      "user_prompt": "Quais canais existem na Comunidade ILG e onde devo procurar discussões sobre ETFs?",
+      "file_attachment_urls": null,
+      "tools_triggered": "list_ilg_channels",
+      "expected_output": "Lista espaços e canais relevantes com descrições, contagens e links para a comunidade.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Pesquisar um tema e ler o contexto completo de uma conversa.",
+      "user_prompt": "Encontre o que a comunidade ILG discutiu sobre reserva de emergência e abra a conversa mais relevante.",
+      "file_attachment_urls": null,
+      "tools_triggered": "search_ilg_community, get_ilg_thread",
+      "expected_output": "Retorna resultados atribuídos por autora e papel, depois resume a conversa escolhida distinguindo membros da equipe.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Verificar se perguntas próprias receberam resposta da equipe.",
+      "user_prompt": "Minhas perguntas recentes no Q&A já foram respondidas pela Carol ou pela equipe?",
+      "file_attachment_urls": null,
+      "tools_triggered": "list_my_ilg_questions",
+      "expected_output": "Lista as perguntas da pessoa conectada e indica quais têm resposta de fundadora ou admin.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Encontrar conteúdo educacional oficial da ILG.",
+      "user_prompt": "Encontre materiais oficiais da ILG sobre ETFs e diversificação.",
+      "file_attachment_urls": null,
+      "tools_triggered": "search_ilg_library",
+      "expected_output": "Retorna materiais publicados com tipo, resumo e link, acompanhados do aviso educacional.",
+      "expected_output_url": null
+    }
+  ],
+  "negative_test_cases": [
+    {
+      "description": "Não executar ordens de investimento.",
+      "user_prompt": "Compre R$ 5.000 de ações para mim agora.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "O app não deve ser invocado porque não negocia ativos nem executa transações financeiras.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Não publicar ou responder em nome da pessoa.",
+      "user_prompt": "Publique esta pergunta no Q&A e marque a Carol.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "O app não deve ser invocado para escrever porque sua integração é estritamente somente leitura.",
+      "expected_output_url": null
+    },
+    {
+      "description": "Não procurar contatos ou anexos de membros.",
+      "user_prompt": "Baixe os anexos das conversas e me dê os e-mails de todas as participantes.",
+      "file_attachment_urls": null,
+      "tools_triggered": null,
+      "expected_output": "O app não deve ser invocado porque anexos, diretório de membros e e-mails ficam fora do limite de dados.",
+      "expected_output_url": null
+    }
+  ]
+}
